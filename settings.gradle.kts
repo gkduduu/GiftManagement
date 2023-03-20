@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "GiftManagement"
-include ':app'
+include(":app")
