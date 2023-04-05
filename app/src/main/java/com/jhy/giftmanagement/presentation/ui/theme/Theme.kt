@@ -1,4 +1,4 @@
-package com.jhy.giftmanagement.activity.ui.theme
+package com.jhy.giftmanagement.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

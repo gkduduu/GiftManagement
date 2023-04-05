@@ -1,4 +1,4 @@
-package com.jhy.giftmanagement.activity
+package com.jhy.giftmanagement.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,9 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Observer
-import com.jhy.giftmanagement.activity.ui.theme.GiftManagementTheme
+import com.jhy.giftmanagement.presentation.ui.theme.GiftManagementTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
