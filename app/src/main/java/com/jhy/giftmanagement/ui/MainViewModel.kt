@@ -1,4 +1,4 @@
-package com.jhy.giftmanagement.presentation
+package com.jhy.giftmanagement.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

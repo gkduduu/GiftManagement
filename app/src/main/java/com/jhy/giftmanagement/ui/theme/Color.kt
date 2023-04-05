@@ -1,4 +1,4 @@
-package com.jhy.giftmanagement.presentation.ui.theme
+package com.jhy.giftmanagement.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
