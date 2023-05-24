@@ -13,7 +13,7 @@ junit = "4.13.2"
 androidxJunit = "1.1.5"
 androidxEspresso = "3.5.1"
 hilt = "2.44"
-android = "8.1.0-alpha10"
+android = "8.2.0-alpha02"
 kotlin = "1.8.0"
 
 
