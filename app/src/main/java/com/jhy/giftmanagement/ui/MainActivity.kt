@@ -1,8 +1,16 @@
 package com.jhy.giftmanagement.ui
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,8 +21,6 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +28,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.google.zxing.BinaryBitmap
+import com.google.zxing.LuminanceSource
+import com.google.zxing.MultiFormatReader
+import com.google.zxing.RGBLuminanceSource
+import com.google.zxing.Reader
+import com.google.zxing.common.HybridBinarizer
 import com.jhy.giftmanagement.ui.theme.GiftManagementTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,6 +54,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
+                    GiftList()
+
                     // 다이얼로그 표시
                     if (AddDialogState) {
                         GiftAddDialog() // 다이얼로그 컴포즈
@@ -55,6 +69,7 @@ class MainActivity : ComponentActivity() {
                                 .align(alignment = Alignment.BottomEnd),
                             onClick = {
                                 AddDialogState = true
+                                loadGallery()
                             }
                         ) {
                             Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
@@ -63,5 +78,56 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    //갤러리 실행
+    fun loadGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.setType("image/*")
+        photoChooseActivityLauncher.launch(intent)
+    }
+
+    //사진 선택 후 bitmap으로 변환
+    private val photoChooseActivityLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                var currentImageUri = it.data?.data
+                var bMap: Bitmap
+                try {
+                    currentImageUri?.let {
+                        if (Build.VERSION.SDK_INT < 28) {
+                            bMap = MediaStore.Images.Media.getBitmap(this.contentResolver, currentImageUri)
+                        } else {
+                            val source =
+                                ImageDecoder.createSource(this.contentResolver, currentImageUri)
+                            bMap = ImageDecoder.decodeBitmap(source)
+                        }
+                        getBarcodeToImage(bMap)
+                    }
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+//            else if (it.resultCode == RESULT_CANCELED) {
+//            }
+        }
+
+    //bitmap이미지에서 바코드 가져오기 throw zxing.NotFoundException
+    fun getBarcodeToImage(originalBMap: Bitmap) {
+        val bMap = if(Build.VERSION.SDK_INT > 25)
+            originalBMap.copy(Bitmap.Config.RGBA_F16, true)
+        else originalBMap
+
+        var contents: String? = null
+        val intArray = IntArray(bMap.width * bMap.height)
+        bMap.getPixels(intArray, 0, bMap.width, 0, 0, bMap.width, bMap.height)
+        val source: LuminanceSource = RGBLuminanceSource(bMap.width, bMap.height, intArray)
+        val bitmap = BinaryBitmap(HybridBinarizer(source))
+        val reader: Reader = MultiFormatReader()
+        val result = reader.decode(bitmap)
+        contents = result.text
+        Log.i("jhy!!", contents)
     }
 }
