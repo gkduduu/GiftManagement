@@ -80,6 +80,7 @@ class MainActivity : ComponentActivity() {
                                 AddDialogState = true
                                 loadGallery()
                             }
+
                         ) {
                             Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
                         }
@@ -135,9 +136,11 @@ class MainActivity : ComponentActivity() {
         val source: LuminanceSource = RGBLuminanceSource(bMap.width, bMap.height, intArray)
         val bitmap = BinaryBitmap(HybridBinarizer(source))
         val reader: Reader = MultiFormatReader()
+
         val result = reader.decode(bitmap)
         contents = result.text
         Log.i("jhy!!", contents)
+
     }
 
     //코드를 바코드 비트맵으로 변환

@@ -10,13 +10,12 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jhy.giftmanagement.data.GiftCategory
-import com.jhy.giftmanagement.data.GiftInfoData
+import com.jhy.giftmanagement.data.GiftInfo
 import java.util.Date
 
 @Composable
@@ -27,12 +26,12 @@ fun GiftList() {
         columns = GridCells.Fixed(2)
     ) {
         items(numbers.size) {
-            GiftDetail(giftInfoData = GiftInfoData(1,"","","", Date(),"",GiftCategory.BAKERY))
+            GiftDetail(giftInfo = GiftInfo(1,"","","", Date(),"",GiftCategory.BAKERY))
         }
     }
 }
 @Composable
-fun GiftDetail(giftInfoData: GiftInfoData) {
+fun GiftDetail(giftInfo: GiftInfo) {
     Column {
         Box(modifier = Modifier.height(300.dp))
         Text(text = "품목명")

@@ -13,9 +13,11 @@ junit = "4.13.2"
 androidxJunit = "1.1.5"
 androidxEspresso = "3.5.1"
 hilt = "2.44"
-android = "8.2.0-alpha02"
+android = "8.2.0-alpha06"
 kotlin = "1.8.0"
 zxing = "4.3.0"
+roomCommon = "2.5.1"
+roomKtx = "2.5.1"
 
 [libraries]
 androidx-core-ktx = {group = "androidx.core", name = "core-ktx", version.ref = "androidxCore"}
@@ -37,6 +39,8 @@ androidx-compose-ui-test = {group = "androidx.compose.ui", name = "ui-test-manif
 dagger-hilt = {group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 dagger-hilt-compiler = {group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
 zxing = {group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxing"}
+androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = {id = "com.android.application", version.ref = "android"}

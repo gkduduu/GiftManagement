@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.activity)
     implementation(libs.dagger.hilt)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     kapt(libs.dagger.hilt.compiler)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)

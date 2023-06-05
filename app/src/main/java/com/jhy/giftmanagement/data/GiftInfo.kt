@@ -2,7 +2,7 @@ package com.jhy.giftmanagement.data
 
 import java.util.Date
 
-data class GiftInfoData(
+data class GiftInfo(
     val giftID : Int,
     val giftTitle : String,
     val giftContent : String,
