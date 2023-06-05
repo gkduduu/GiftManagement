@@ -1,6 +1,5 @@
 package com.jhy.giftmanagement.ui
 
-import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -9,10 +8,7 @@ import android.util.Log
 import android.util.TypedValue
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.room.Room
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.LuminanceSource
@@ -21,9 +17,12 @@ import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.Reader
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.oned.Code128Writer
-import com.jhy.giftmanagement.db.GiftInfoDatabas
+import com.jhy.giftmanagement.db.GiftInfoDatabase
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val giftInfoDatabase: GiftInfoDatabase
+) : ViewModel() {
 
     //bitmap이미지에서 바코드 가져오기 throw zxing.NotFoundException
     fun getBarcodeToImage(originalBMap: Bitmap) {
