@@ -68,6 +68,7 @@ fun Main(viewModel : MainViewModel, activity: MainActivity) {
             }
         }
     }
+
 }
 
 //갤러리 실행
@@ -85,7 +86,7 @@ fun GiftList() {
         columns = GridCells.Fixed(2)
     ) {
         items(numbers.size) {
-            GiftDetail(giftInfo = GiftInfo(1,"","","", "","",GiftCategory.BAKERY))
+            GiftDetail(giftInfo = GiftInfo("","","", "","",GiftCategory.BAKERY))
         }
     }
 }

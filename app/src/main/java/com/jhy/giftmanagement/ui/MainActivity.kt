@@ -11,9 +11,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.coroutineScope
 import com.jhy.giftmanagement.db.GiftInfoDatabase
 import com.jhy.giftmanagement.ui.theme.GiftManagementTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,14 +24,18 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var giftInfoDatabase: GiftInfoDatabase
-//    private val giftInfoDatabase = GiftInfoDatabase.getDatabase(applicationContext)
-//    private val giftInfoDao = giftInfoDatabase.giftInfoDao()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GiftManagementTheme {
                 Main(viewModel,this)
+
+            }
+        }
+
+        lifecycle.coroutineScope.launch {
+            viewModel.getAllGift().collect() {
             }
         }
     }

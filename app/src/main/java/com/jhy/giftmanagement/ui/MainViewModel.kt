@@ -1,14 +1,19 @@
 package com.jhy.giftmanagement.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import android.util.TypedValue
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.LuminanceSource
@@ -17,9 +22,13 @@ import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.Reader
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.oned.Code128Writer
+import com.jhy.giftmanagement.data.GiftCategory
+import com.jhy.giftmanagement.db.GiftInfo
 import com.jhy.giftmanagement.db.GiftInfoDatabase
 import com.jhy.giftmanagement.repo.GiftInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,8 +36,16 @@ class MainViewModel @Inject constructor(
     private val giftInfoRepository: GiftInfoRepository
 ) : ViewModel() {
 
+    fun getAllGift(): Flow<List<GiftInfo>> = giftInfoRepository.getAllGift()
+
     //bitmap이미지에서 바코드 가져오기 throw zxing.NotFoundException
     fun getBarcodeToImage(originalBMap: Bitmap) {
+        viewModelScope.launch {
+            getAllGift().collect() {
+                Log.i("jhy","사이즈! ${it.size}")
+            }
+        }
+
         val bMap = if(Build.VERSION.SDK_INT > 25)
             originalBMap.copy(Bitmap.Config.RGBA_F16, true)
         else originalBMap

@@ -6,12 +6,13 @@ import com.jhy.giftmanagement.data.GiftCategory
 
 @Entity(tableName = "giftinfo")
 data class GiftInfo (
-    @PrimaryKey(autoGenerate = true)
-    val giftID : Long,
     val giftTitle : String,
     val giftContent : String,
     val giftURL : String,
     val giftExpiredDate: String,
     val giftBarcode : String,
     val giftCategory : GiftCategory
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var giftID: Long = 0
+}
