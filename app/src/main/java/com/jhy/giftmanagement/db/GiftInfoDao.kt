@@ -1,16 +1,18 @@
 package com.jhy.giftmanagement.db
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+@Dao
 interface GiftInfoDao {
     @Query("SELECT * FROM giftinfo")
-    fun getAllGift(): List<GiftInfoEntity>
+    suspend fun getAllGift(): List<GiftInfo>
 
     @Insert
-    fun insertGift(giftInfo: GiftInfoEntity)
+    suspend fun insertGift(giftInfo: GiftInfo)
 
     @Delete
-    fun deleteGift(giftInfo: GiftInfoEntity)
+    suspend fun deleteGift(giftInfo: GiftInfo)
 }

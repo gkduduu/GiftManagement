@@ -30,7 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jhy.giftmanagement.data.GiftCategory
-import com.jhy.giftmanagement.db.GiftInfoEntity
+import com.jhy.giftmanagement.db.GiftInfo
 import java.util.Date
 
 @Composable
@@ -85,12 +85,12 @@ fun GiftList() {
         columns = GridCells.Fixed(2)
     ) {
         items(numbers.size) {
-            GiftDetail(giftInfo = GiftInfoEntity(1,"","","", Date(),"",GiftCategory.BAKERY))
+            GiftDetail(giftInfo = GiftInfo(1,"","","", "","",GiftCategory.BAKERY))
         }
     }
 }
 @Composable
-fun GiftDetail(giftInfo: GiftInfoEntity) {
+fun GiftDetail(giftInfo: GiftInfo) {
     Column {
         Box(modifier = Modifier.height(300.dp))
         Text(text = "품목명")

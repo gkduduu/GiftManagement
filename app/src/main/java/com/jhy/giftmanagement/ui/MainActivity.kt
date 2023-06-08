@@ -14,10 +14,14 @@ import androidx.activity.viewModels
 import com.jhy.giftmanagement.db.GiftInfoDatabase
 import com.jhy.giftmanagement.ui.theme.GiftManagementTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var giftInfoDatabase: GiftInfoDatabase
 //    private val giftInfoDatabase = GiftInfoDatabase.getDatabase(applicationContext)
 //    private val giftInfoDao = giftInfoDatabase.giftInfoDao()
 

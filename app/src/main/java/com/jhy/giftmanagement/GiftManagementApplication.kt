@@ -6,5 +6,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class GiftManagementApplication : Application() {
-    val database by lazy { GiftInfoDatabase.getDatabase(this) }
 }
