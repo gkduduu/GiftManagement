@@ -8,20 +8,23 @@ androidxAppcompat = "1.6.1"
 androidMaterial = "1.8.0"
 androidxLifecycle = "2.3.1"
 androidxActivity = "1.5.1"
-androidxComposeBom = "2023.01.00"
+androidxComposeBom = "2023.03.00"
+coilCompose = "2.2.2"
 junit = "4.13.2"
 androidxJunit = "1.1.5"
 androidxEspresso = "3.5.1"
 hilt = "2.44"
-android = "8.2.0-alpha06"
+android = "8.2.2"
 kotlin = "1.8.0"
 zxing = "4.3.0"
 roomCommon = "2.5.1"
 roomKtx = "2.5.1"
+coreI18n = "1.0.0-alpha01"
+material3Android = "1.2.1"
 
 [libraries]
 androidx-core-ktx = {group = "androidx.core", name = "core-ktx", version.ref = "androidxCore"}
-androidx-appcompat = {group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompat"}
+androidx-appcompat = {group = "androidx.appcompat", name = "appcompat", version.ref="androidxAppcompat"}
 android-material = {group = "com.google.android.material", name = "material", version.ref = "androidMaterial"}
 androidx-lifecycle-runtime = {group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle"}
 androidx-activity = {group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity"}
@@ -30,6 +33,7 @@ androidx-compose-ui = {group = "androidx.compose.ui", name = "ui"}
 androidx-compose-ui-graphics = {group = "androidx.compose.ui", name = "ui-graphics"}
 androidx-compose-ui-tooling-preview = {group = "androidx.compose.ui", name = "ui-tooling-preview"}
 androidx-compose-material3 = {group = "androidx.compose.material3", name = "material3"}
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = {group = "junit", name = "junit", version.ref = "junit"}
 androidx-junit = {group ="androidx.test.ext", name = "junit", version.ref = "androidxJunit"}
 androidx-espresso = {group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso"}
@@ -42,6 +46,8 @@ zxing = {group = "com.journeyapps", name = "zxing-android-embedded", version.ref
 androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCommon" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
 [plugins]
 android-application = {id = "com.android.application", version.ref = "android"}

@@ -35,8 +35,7 @@ class MainActivity : ComponentActivity() {
         }
 
         lifecycle.coroutineScope.launch {
-            viewModel.getAllGift().collect() {
-            }
+            viewModel.getAllGift()
         }
     }
 
@@ -51,10 +50,16 @@ class MainActivity : ComponentActivity() {
                         if (Build.VERSION.SDK_INT < 28) {
                             bMap = MediaStore.Images.Media.getBitmap(this.contentResolver, currentImageUri)
                         } else {
-                            val source =
-                                ImageDecoder.createSource(this.contentResolver, currentImageUri)
-                            bMap = ImageDecoder.decodeBitmap(source)
+                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+                            bMap = ImageDecoder.decodeBitmap(source) { decoder, _, _ ->
+                                decoder.allocator = ImageDecoder.ALLOCATOR_SOFTWARE
+                                decoder.isMutableRequired = true
+                            }.copy(Bitmap.Config.ARGB_8888, true)
+//                            val source =
+//                                ImageDecoder.createSource(this.contentResolver, currentImageUri)
+//                            bMap = ImageDecoder.decodeBitmap(source)
                         }
+                        viewModel.setImage(currentImageUri,this)
                         viewModel.getBarcodeToImage(bMap)
                     }
 

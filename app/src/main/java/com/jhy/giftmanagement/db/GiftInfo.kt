@@ -10,7 +10,7 @@ data class GiftInfo (
     val giftContent : String,
     val giftURL : String,
     val giftExpiredDate: String,
-    val giftBarcode : String,
+    val giftBarcode : String?,
     val giftCategory : GiftCategory
 ){
     @PrimaryKey(autoGenerate = true)
